@@ -5,379 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon - Apple 风格主页</title>
     <style>
-        /* --- 全局重置与字体 --- */
-        :root {
-            --bg-color: #f5f5f7;
-            --text-black: #1d1d1f;
-            --text-grey: #86868b;
-            --link-blue: #0066cc;
-            --btn-blue: #0071e3;
-            --nav-bg: rgba(0, 0, 0, 0.8);
-            --nav-text: #f5f5f7;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #fff;
-            color: var(--text-black);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* --- 导航栏 (Glassmorphism) --- */
-        nav {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 44px;
-            background-color: var(--nav-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 12px;
-        }
-
-        .nav-content {
-            width: 100%;
-            max-width: 980px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 22px;
-        }
-
-        .nav-item {
-            color: #d6d6d6;
-            transition: color 0.3s ease;
-            font-weight: 400;
-        }
-
-        .nav-item:hover {
-            color: #fff;
-        }
-
-        /* 简单的宝可梦 Logo 模拟 */
-        .logo-icon img {
-            height: 18px;
-            filter: brightness(0) invert(1); /* 变成白色 */
-            display: block;
-        }
-
-        /* --- 通用组件 --- */
-        .cta-links {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 15px;
-            font-size: 17px; /* Apple 标准链接大小 */
-        }
-
-        .cta-link {
-            color: var(--link-blue);
-            display: flex;
-            align-items: center;
-        }
-
-        .cta-link:hover {
-            text-decoration: underline;
-        }
-
-        .cta-link::after {
-            content: '›';
-            font-size: 20px;
-            margin-left: 5px;
-            margin-top: -2px;
-        }
-
-        /* 按钮风格 */
-        .btn {
-            padding: 12px 24px; /* 加大按钮 */
-            border-radius: 980px;
-            font-size: 17px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: var(--btn-blue);
-            color: white;
-            border: 1px solid var(--btn-blue);
-        }
-
-        .btn-primary:hover {
-            background-color: #0077ed;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--btn-blue);
-            border: 1px solid var(--btn-blue);
-        }
-
-        .btn-outline:hover {
-            background-color: rgba(0, 113, 227, 0.05);
-        }
-
-        /* --- 主要部分 (Hero Section) --- */
-        .section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 55px;
-            margin-bottom: 12px;
-        }
-
-        .hero-pikachu {
-            background-color: #fbfbfd; /* Apple 浅灰背景 */
-            min-height: 90vh; /* 占据大部分屏幕 */
-            justify-content: flex-start;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 10;
-            max-width: 600px;
-        }
-
-        .product-new {
-            color: #e3aa00; /* 皮卡丘黄 */
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .product-name {
-            font-size: 56px;
-            line-height: 1.07143;
-            font-weight: 600;
-            letter-spacing: -0.005em;
-            margin-bottom: 6px;
-        }
-
-        .product-desc {
-            font-size: 28px;
-            line-height: 1.10722;
-            font-weight: 400;
-            letter-spacing: 0.004em;
-            margin-bottom: 20px;
-        }
-
-        .hero-image {
-            margin-top: 40px;
-            width: 600px; /* 控制图片大小 */
-            max-width: 90%;
-            height: auto;
-            object-fit: contain;
-            transition: transform 1s ease;
-        }
+        :root { --bg-color: #f5f5f7; --text-black: #1d1d1f; --link-blue: #0066cc; --btn-blue: #0071e3; --nav-bg: rgba(0, 0, 0, 0.8); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background-color: #fff; color: var(--text-black); }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
         
-        .hero-image:hover {
-             transform: scale(1.02);
-        }
+        /* 导航栏 */
+        nav { position: sticky; top: 0; width: 100%; height: 44px; background-color: var(--nav-bg); backdrop-filter: saturate(180%) blur(20px); z-index: 9999; display: flex; justify-content: center; align-items: center; font-size: 12px; }
+        .nav-content { width: 100%; max-width: 980px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; }
+        .nav-item { color: #d6d6d6; transition: color 0.3s ease; }
+        .nav-item:hover { color: #fff; }
+        .nav-item.active { color: #fff; } /* 当前页面高亮 */
 
-        /* --- 暗色部分 (Dark Mode Section) --- */
-        .section-dark {
-            background-color: #000;
-            color: #f5f5f7;
-            min-height: 80vh;
-        }
+        /* 按钮与通用 */
+        .btn { padding: 12px 24px; border-radius: 980px; font-size: 17px; display: inline-block; transition: all 0.3s; margin: 5px; }
+        .btn-primary { background-color: var(--btn-blue); color: white; }
+        .btn-primary:hover { background-color: #0077ed; }
+        .btn-outline { border: 1px solid var(--btn-blue); color: var(--btn-blue); }
+        .btn-outline:hover { background-color: rgba(0,113,227,0.05); }
 
-        .section-dark .product-name {
-            color: #fff;
-        }
-        
-        .section-dark .cta-link {
-            color: #2997ff; /* 暗色模式下的蓝色 */
-        }
-
-        /* --- 网格布局 (Bento Grid) --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 12px;
-            max-width: 100%;
-        }
-
-        .grid-item {
-            background-color: #f5f5f7;
-            height: 580px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding-top: 50px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        /* 特殊卡片：喷火龙 */
-        .card-charizard {
-            background-color: #fff;
-        }
-
-        .grid-image {
-            margin-top: auto;
-            margin-bottom: 50px;
-            max-width: 80%;
-            max-height: 350px;
-            object-fit: contain;
-        }
-
-        .badge {
-            font-size: 12px;
-            font-weight: 600;
-            border: 1px solid #1d1d1f;
-            border-radius: 12px;
-            padding: 4px 10px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: #f5f5f7;
-            padding: 40px 22px;
-            font-size: 12px;
-            color: var(--text-grey);
-        }
-        
-        .footer-content {
-            max-width: 980px;
-            margin: 0 auto;
-            border-top: 1px solid #d2d2d7;
-            padding-top: 20px;
-        }
-
-        /* --- 响应式 --- */
-        @media (max-width: 768px) {
-            .product-name { font-size: 32px; }
-            .product-desc { font-size: 21px; }
-            .grid-container { grid-template-columns: 1fr; }
-            .nav-content { justify-content: space-evenly; }
-            .nav-item:not(.logo-icon) { display: none; } /* 移动端简化导航 */
-            .nav-item.mobile-menu { display: block; }
-        }
-
+        /* Hero */
+        .section { display: flex; flex-direction: column; align-items: center; padding-top: 55px; padding-bottom: 50px; text-align: center; }
+        .hero-pikachu { background-color: #fbfbfd; min-height: 90vh; }
+        .product-name { font-size: 56px; font-weight: 600; margin-bottom: 6px; }
+        .product-desc { font-size: 28px; font-weight: 400; margin-bottom: 20px; }
+        .hero-image { margin-top: 40px; width: 500px; max-width: 90%; transition: transform 1s; }
+        .hero-image:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-content">
-            <a href="#" class="nav-item logo-icon">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg" alt="Logo">
-            </a>
-            <a href="#" class="nav-item">图鉴</a>
-            <a href="#" class="nav-item">视频游戏</a>
-            <a href="#" class="nav-item">集换式卡牌</a>
-            <a href="#" class="nav-item">动画</a>
-            <a href="#" class="nav-item">商店</a>
-            <a href="#" class="nav-item">搜索</a>
-            <a href="#" class="nav-item">购物袋</a>
+            <a href="index.html" class="nav-item"> Pokémon</a>
+            <a href="pokedex.html" class="nav-item">图鉴 Pro</a>
+            <a href="store.html" class="nav-item">商店</a>
+            <a href="#" class="nav-item">服务</a>
         </div>
     </nav>
 
     <section class="section hero-pikachu">
-        <div class="hero-content">
-            <p class="product-new">全新登场</p>
-            <h1 class="product-name">Pikachu Pro</h1>
-            <h2 class="product-desc">十万伏特。震撼全场。</h2>
-            
-            <div class="cta-links" style="margin-top: 20px;">
-                <a href="#" class="btn btn-primary">购买</a>
-                <a href="#" class="btn btn-outline">进一步了解</a>
-            </div>
+        <h1 class="product-name">Pikachu Pro</h1>
+        <h2 class="product-desc">强劲电力。震撼全场。</h2>
+        <div>
+            <a href="store.html" class="btn btn-primary">购买</a>
+            <a href="pokedex.html" class="btn btn-outline">进一步了解</a>
         </div>
-        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" alt="Pikachu" class="hero-image">
+        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" class="hero-image">
     </section>
 
-    <section class="section section-dark">
-        <div class="hero-content">
-            <h1 class="product-name">Mewtwo</h1>
-            <h2 class="product-desc">意念。重塑未来。</h2>
-            <div class="cta-links">
-                <a href="#" class="cta-link">进一步了解</a>
-                <a href="#" class="cta-link">观看影片</a>
-            </div>
-        </div>
-        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png" alt="Mewtwo" class="hero-image" style="filter: drop-shadow(0 0 20px rgba(166, 76, 255, 0.4));">
-    </section>
-
-    <div class="grid-container">
-        
-        <div class="grid-item card-charizard">
-            <span class="badge">FIRE MAX</span>
-            <h3 class="product-name" style="font-size: 36px;">Charizard</h3>
-            <p class="product-desc" style="font-size: 19px;">燃烧激情，直冲云霄。</p>
-            <div class="cta-links">
-                <a href="#" class="cta-link">进一步了解</a>
-                <a href="#" class="cta-link">购买</a>
-            </div>
-            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png" alt="Charizard" class="grid-image">
-        </div>
-
-        <div class="grid-item">
-            <h3 class="product-name" style="font-size: 36px;">Eevee</h3>
-            <p class="product-desc" style="font-size: 19px;">无限可能。随心进化。</p>
-            <div class="cta-links">
-                <a href="#" class="cta-link">进一步了解</a>
-            </div>
-            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png" alt="Eevee" class="grid-image">
-        </div>
-
-        <div class="grid-item" style="background-color: #fbfbfd;">
-            <h3 class="product-name" style="font-size: 36px;">Gengar</h3>
-            <p class="product-desc" style="font-size: 19px;">暗影中的恶作剧。</p>
-            <div class="cta-links">
-                <a href="#" class="cta-link">进一步了解</a>
-            </div>
-            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/094.png" alt="Gengar" class="grid-image">
-        </div>
-
-        <div class="grid-item" style="background-color: #fff;">
-            <div class="logo-icon" style="margin-bottom:10px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg" style="filter: invert(0); opacity: 0.5;" width="30">
-            </div>
-            <h3 class="product-name" style="font-size: 36px;">Bulbasaur</h3>
-            <p class="product-desc" style="font-size: 19px;">自然的起点。</p>
-            <div class="cta-links">
-                <a href="#" class="cta-link">购买</a>
-            </div>
-            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png" alt="Bulbasaur" class="grid-image">
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <p>Copyright © 2024 Pokémon Inc. 保留所有权利。</p>
-            <p style="margin-top: 10px;">
-                <a href="#">隐私政策</a> | <a href="#">使用条款</a> | <a href="#">销售政策</a> | <a href="#">法律信息</a>
-            </p>
-            <p style="margin-top: 10px;">
-                 本网站纯属设计练习，与 Apple Inc. 或 The Pokémon Company 无关。
-            </p>
-        </div>
+    <footer style="background:#f5f5f7; padding:20px; text-align:center; font-size:12px; color:#86868b;">
+        <p>Copyright © 2024 Pokémon Inc. 保留所有权利。</p>
     </footer>
-
 </body>
 </html>
